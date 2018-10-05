@@ -10,4 +10,4 @@
 ---couleur a programmer---
 rouge(F42A41) vert(006A4E) blanc(FFFFFF) 
 noir (000000) bleu (0072CE) jaune(#FFFF00)
-
++violet(#CC00FF)
