@@ -123,6 +123,14 @@ Robot::ColorFinder* Robot::ressources::get_ball_finder() const
 {
     return m_ball_finder;
 } // end get_ball_finder()
+/*************************************************************************************/
+/**
+  * \brief Retourne le composant ColorFinder sur la couleur violette.
+  */
+Robot::ColorFinder* Robot::ressources::get_purple_finder() const
+{
+    return m_purple_finder;
+} // end get_purple_finder()
 
 /*************************************************************************************/
 /**

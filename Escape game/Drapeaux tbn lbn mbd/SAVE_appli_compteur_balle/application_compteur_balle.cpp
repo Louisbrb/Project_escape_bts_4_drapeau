@@ -85,38 +85,38 @@ void Robot::application_compteur_balle::mode_compteur_balle()
 {
     traitement_camera();
 
-    affiche_nombre_de_pixels_bleus();
-    affiche_nombre_de_balles_bleues();
+//    affiche_nombre_de_pixels_bleus();
+//    affiche_nombre_de_balles_bleues();
 }
 
 /*************************************************************************************/
 /**
   * \brief Affiche le nombre de pixels bleues.
   */
-void Robot::application_compteur_balle::affiche_nombre_de_pixels_bleus()
-{
-    int nb_pixels_bleu = 0;
-    for ( int ligne = 0; ligne != HEIGHT; ++ligne )
-        for ( int colonne = 0; colonne != WIDTH; ++colonne )
-            if ( m_tab_pixel_bleu[ligne][colonne] )
-                ++nb_pixels_bleu;
-
-    std::cout << "Il y a " << nb_pixels_bleu << " pixels bleus." << std::endl;
-}
+//void Robot::application_compteur_balle::affiche_nombre_de_pixels_bleus()
+//{
+//    int nb_pixels_bleu = 0;
+//    for ( int ligne = 0; ligne != HEIGHT; ++ligne )
+//        for ( int colonne = 0; colonne != WIDTH; ++colonne )
+//            if ( m_tab_pixel_bleu[ligne][colonne] )
+//                ++nb_pixels_bleu;
+//
+//    std::cout << "Il y a " << nb_pixels_bleu << " pixels bleus." << std::endl;
+//}
 
 /*************************************************************************************/
 /**
   * \brief Affiche le nombre de balles bleues.
   */
-void Robot::application_compteur_balle::affiche_nombre_de_balles_bleues()
-{
-    int nb_balles = 0;
-
-    // A FAIRE
-    // ...
-    
-    std::cout << "Il y a " << nb_balles << " balles bleues" << std::endl;
-}
+//void Robot::application_compteur_balle::affiche_nombre_de_balles_bleues()
+//{
+//    int nb_balles = 0;
+//
+//    // A FAIRE
+//    // ...
+//
+//    std::cout << "Il y a " << nb_balles << " balles bleues" << std::endl;
+//}
 
 /*************************************************************************************/
 /**
@@ -127,11 +127,11 @@ void Robot::application_compteur_balle::traitement_camera()
     LinuxCamera::GetInstance()->CaptureFrame();
     memcpy(m_ressources.get_rgb_output()->m_ImageData, LinuxCamera::GetInstance()->fbuffer->m_RGBFrame->m_ImageData,
            LinuxCamera::GetInstance()->fbuffer->m_RGBFrame->m_ImageSize);
-    Point2D red_pos, yellow_pos, blue_pos, green_pos;
+    Point2D red_pos, yellow_pos, blue_pos, green_pos,purple_pos;
 
     if( StatusCheck::m_cur_mode == READY || StatusCheck::m_cur_mode == VISION || StatusCheck::m_cur_mode == SOCCER || StatusCheck::m_cur_mode == MOTION )
     {
-        blue_pos = m_ressources.get_blue_finder()->GetPosition(LinuxCamera::GetInstance()->fbuffer->m_HSVFrame);
+        purple_pos = m_ressources.get_purple_finder()->GetPosition(LinuxCamera::GetInstance()->fbuffer->m_HSVFrame);
 
         // modification de la sortie vidéo pour un meilleur contrôle de la détection
         unsigned char r, g, b;
@@ -141,15 +141,15 @@ void Robot::application_compteur_balle::traitement_camera()
             
             int ligne = i / WIDTH;
             int colonne = i % WIDTH;
-            m_tab_pixel_bleu[ ligne ][ colonne ] = false; // par défaut, le pixel n'est pas bleu
+            m_tab_pixel_drapeau[ ligne ][ colonne ] = false; // par défaut, le pixel n'est pas violet
 
-            // bleu
-            if(m_ressources.get_blue_finder()->m_result->m_ImageData[i] == 1)
+            // violet
+            if(m_ressources.get_purple_finder()->m_result->m_ImageData[i] == 1)
             {
                 r = 0;
                 g = 0;
                 b = 255;
-                m_tab_pixel_bleu[ ligne ][ colonne ] = true;
+                m_tab_pixel_drapeau[ ligne ][ colonne ] = true;
             }
 
             if(r > 0 || g > 0 || b > 0)
@@ -159,7 +159,31 @@ void Robot::application_compteur_balle::traitement_camera()
                 m_ressources.get_rgb_output()->m_ImageData[i * m_ressources.get_rgb_output()->m_PixelSize + 2] = b;
             }
         }
+        supprimerPixel(0,0);
     }
     
     m_ressources.get_streamer()->send_image(m_ressources.get_rgb_output());
+}
+void Robot::supprimerPixel(int i,int j)
+{
+    if(m_tab_pixel_purple[i][j] == false)
+    {
+        m_tab_pixel_purple[i][j] = NULL;
+    }
+    if(m_tab_pixel_purple[i-1][j] == false && i>0)
+    {
+        supprimerPixel(i-1,j);
+    }
+    if(m_tab_pixel_purple[i+1][j] == false && i<ligne)
+    {
+        supprimerPixel(i+1,j);
+    }
+    if(m_tab_pixel_purple[i][j+1] == false && j<colonne)
+    {
+        supprimerPixel(i,j+1);
+    }
+    if(m_tab_pixel_purple[i][j-1] == false && j>0)
+    {
+        supprimerPixel(i,j-1);
+    }
 }
