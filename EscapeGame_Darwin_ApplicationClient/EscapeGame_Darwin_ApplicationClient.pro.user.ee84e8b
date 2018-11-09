@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.3.1, 2018-11-09T11:37:06. -->
+<!-- Written by QtCreator 4.3.1, 2018-10-16T11:59:51. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
-  <value type="QByteArray">{28f006b8-11c7-4b82-a2c0-2bd92051e490}</value>
+  <value type="QByteArray">{ee84e8bd-48a9-4c4f-9ce6-3bbbe9bc9294}</value>
  </data>
  <data>
   <variable>ProjectExplorer.Project.ActiveTarget</variable>
@@ -285,8 +285,8 @@
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">EscapeGame_Darwin_ApplicationClient</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">EscapeGame_Darwin_ApplicationClient2</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/louis.burban/Documents/GitHub/Project_escape_bts_4_drapeau/EscapeGame_Darwin_ApplicationClient/EscapeGame_Darwin_ApplicationClient.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/mehdi.belhaj/Documents/GitHub/Project_escape_bts_4_drapeau/EscapeGame_Darwin_ApplicationClient/EscapeGame_Darwin_ApplicationClient.pro</value>
     <value type="bool" key="QmakeProjectManager.QmakeRunConfiguration.UseLibrarySearchPath">true</value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.CommandLineArguments"></value>
     <value type="QString" key="Qt4ProjectManager.Qt4RunConfiguration.ProFile">EscapeGame_Darwin_ApplicationClient.pro</value>
