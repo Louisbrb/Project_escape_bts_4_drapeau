@@ -1,0 +1,17 @@
+﻿<Window x:Name="fenetreprincipale" x:Class="WpfApp1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Alfred" Height="350" Width="525">
+    <Grid>
+        <Button x:Name="Regles" Content="Règles" HorizontalAlignment="Left" Margin="46,0,0,24" Width="75" Height="20" VerticalAlignment="Bottom"/>
+        <Button x:Name="Indices" Content="Indices" Margin="373,275,69,24" AutomationProperties.HelpText="Demander un indice en échange de temps"/>
+        <TextBox x:Name="champReponse" Margin="126,0,130,147" TextWrapping="Wrap" Text="Entrez réponse" Height="23" VerticalAlignment="Bottom" Background="#FFACAAAA"/>
+        <Button x:Name="valider" Content="Valider" Margin="0,0,223,113" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
+        <Label x:Name="conseil" Content="Lisez les règles, le jeu est simple ;)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="154,40,0,0"/>
+
+    </Grid>
+</Window>
