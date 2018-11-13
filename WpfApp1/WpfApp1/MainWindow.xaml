@@ -6,12 +6,20 @@
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="Alfred" Height="350" Width="525">
+    <Window.Resources>
+        <Style x:Key="Regles" TargetType="Label">
+            <Setter Property="FontFamily" Value="Papyrus" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="Heavy" />
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Button x:Name="Regles" Content="Règles" HorizontalAlignment="Left" Margin="46,0,0,24" Width="75" Height="20" VerticalAlignment="Bottom"/>
-        <Button x:Name="Indices" Content="Indices" Margin="373,275,69,24" AutomationProperties.HelpText="Demander un indice en échange de temps"/>
-        <TextBox x:Name="champReponse" Margin="126,0,130,147" TextWrapping="Wrap" Text="Entrez réponse" Height="23" VerticalAlignment="Bottom" Background="#FFACAAAA"/>
-        <Button x:Name="valider" Content="Valider" Margin="0,0,223,113" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom"/>
-        <Label x:Name="conseil" Content="Lisez les règles, le jeu est simple ;)" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="154,40,0,0"/>
+        <Button x:Name="Indices" Content="Indices" Margin="0,0,69,24" AutomationProperties.HelpText="Demander un indice en échange d'une vie." HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom" Click="Indices_Click"/>
+        <TextBox x:Name="champReponse" Margin="126,0,130,147" TextWrapping="Wrap" Text="Entrez réponse" Height="23" VerticalAlignment="Bottom" Background="#FFACAAAA" GotFocus="champReponse_GotFocus" GotMouseCapture="champReponse_GotMouseCapture" SpellCheck.IsEnabled="True" />
+        <Button x:Name="valider" Content="Valider" Margin="0,0,223,113" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom" Click="valider_Click"/>
+        <Label Style="{StaticResource Regles}" x:Name="conseil" Content="Bonjour je suis Alfred.&#xD;&#xA;Montrez un drapeau à Darwin, il vous dira de quel pays il s'agit.&#xD;&#xA;S'il se trompe, entre la bonne réponse ci-dessous!" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="85,33,0,0"/>
+        <Button x:Name="mehdi" Content="☺" HorizontalAlignment="Left" Margin="70,0,0,24" Width="20" Click="mehdi_Click" Height="20" VerticalAlignment="Bottom" FontFamily="Papyrus"/>
 
     </Grid>
 </Window>
