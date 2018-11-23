@@ -53,7 +53,7 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-ltMceu2H5Q,guid=c9b0d0054f9a5f266b8e001b5bea2efc</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-nKvhOgrr0H,guid=69369ca597e5e16b3f64e3715bf75daa</value>
     <value type="QString" >DESKTOP_SESSION=gnome</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
@@ -61,7 +61,7 @@
     <value type="QString" >GDM_KEYBOARD_LAYOUT=us</value>
     <value type="QString" >GDM_LANG=en_US.UTF-8</value>
     <value type="QString" >GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
-    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-TZTLvb/socket</value>
+    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-mbs3wZ/socket</value>
     <value type="QString" >GTK_MODULES=canberra-gtk-module</value>
     <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/darwin/.gtkrc-1.2-gnome2</value>
     <value type="QString" >HOME=/home/darwin</value>
@@ -72,16 +72,16 @@
     <value type="QString" >PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
     <value type="QString" >PWD=/home/darwin</value>
     <value type="QString" >QTDIR=/usr</value>
-    <value type="QString" >SESSION_MANAGER=local/darwin:@/tmp/.ICE-unix/1352,unix/darwin:/tmp/.ICE-unix/1352</value>
+    <value type="QString" >SESSION_MANAGER=local/darwin:@/tmp/.ICE-unix/1107,unix/darwin:/tmp/.ICE-unix/1107</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SPEECHD_PORT=7560</value>
-    <value type="QString" >SSH_AGENT_PID=1413</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-TZTLvb/socket.ssh</value>
+    <value type="QString" >SSH_AGENT_PID=1170</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-mbs3wZ/socket.ssh</value>
     <value type="QString" >USER=darwin</value>
     <value type="QString" >USERNAME=darwin</value>
-    <value type="QString" >XAUTHORITY=/var/run/gdm/auth-for-darwin-m4IE9L/database</value>
+    <value type="QString" >XAUTHORITY=/var/run/gdm/auth-for-darwin-W75azT/database</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/share/gnome:/usr/local/share/:/usr/share/</value>
-    <value type="QString" >XDG_SESSION_COOKIE=f43cb4876fa0cc711b5f2fea52cbbcf1-1542074106.914486-1316951654</value>
+    <value type="QString" >XDG_SESSION_COOKIE=f43cb4876fa0cc711b5f2fea52cbbcf1-1542938025.312960-1636870514</value>
     <value type="QString" >http_proxy=http://10.16.0.6:80/</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
@@ -92,7 +92,7 @@
     <value type="QString" >CONFIG+=debug</value>
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/usr/bin/qmake-qt4</value>
-   <value key="abstractProcess.enabled" type="bool" >false</value>
+   <value key="abstractProcess.enabled" type="bool" >true</value>
    <value key="abstractProcess.workingDirectory" type="QString" >/home/darwin/Desktop/ESCAPE_GAME/Linux/project/escape_game</value>
    <value key="buildConfiguration" type="int" >2</value>
   </valuemap>
@@ -102,7 +102,7 @@
   <valuemap type="QVariantMap" >
    <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-ltMceu2H5Q,guid=c9b0d0054f9a5f266b8e001b5bea2efc</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-nKvhOgrr0H,guid=69369ca597e5e16b3f64e3715bf75daa</value>
     <value type="QString" >DESKTOP_SESSION=gnome</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
@@ -110,7 +110,7 @@
     <value type="QString" >GDM_KEYBOARD_LAYOUT=us</value>
     <value type="QString" >GDM_LANG=en_US.UTF-8</value>
     <value type="QString" >GNOME_DESKTOP_SESSION_ID=this-is-deprecated</value>
-    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-TZTLvb/socket</value>
+    <value type="QString" >GNOME_KEYRING_SOCKET=/tmp/keyring-mbs3wZ/socket</value>
     <value type="QString" >GTK_MODULES=canberra-gtk-module</value>
     <value type="QString" >GTK_RC_FILES=/etc/gtk/gtkrc:/home/darwin/.gtkrc-1.2-gnome2</value>
     <value type="QString" >HOME=/home/darwin</value>
@@ -121,16 +121,16 @@
     <value type="QString" >PATH=/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games</value>
     <value type="QString" >PWD=/home/darwin</value>
     <value type="QString" >QTDIR=/usr</value>
-    <value type="QString" >SESSION_MANAGER=local/darwin:@/tmp/.ICE-unix/1352,unix/darwin:/tmp/.ICE-unix/1352</value>
+    <value type="QString" >SESSION_MANAGER=local/darwin:@/tmp/.ICE-unix/1107,unix/darwin:/tmp/.ICE-unix/1107</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SPEECHD_PORT=7560</value>
-    <value type="QString" >SSH_AGENT_PID=1413</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-TZTLvb/socket.ssh</value>
+    <value type="QString" >SSH_AGENT_PID=1170</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/keyring-mbs3wZ/socket.ssh</value>
     <value type="QString" >USER=darwin</value>
     <value type="QString" >USERNAME=darwin</value>
-    <value type="QString" >XAUTHORITY=/var/run/gdm/auth-for-darwin-m4IE9L/database</value>
+    <value type="QString" >XAUTHORITY=/var/run/gdm/auth-for-darwin-W75azT/database</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/share/gnome:/usr/local/share/:/usr/share/</value>
-    <value type="QString" >XDG_SESSION_COOKIE=f43cb4876fa0cc711b5f2fea52cbbcf1-1542074106.914486-1316951654</value>
+    <value type="QString" >XDG_SESSION_COOKIE=f43cb4876fa0cc711b5f2fea52cbbcf1-1542938025.312960-1636870514</value>
     <value type="QString" >http_proxy=http://10.16.0.6:80/</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >

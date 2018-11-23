@@ -28,17 +28,17 @@ Robot::application_compteur_balle::application_compteur_balle()
 void Robot::application_compteur_balle::run()
 {
     init();
-    
     // attente
     while(Action::GetInstance()->IsRunning()) usleep(8*1000);
     
     if ( Speaker::is_ready() )
         //Speaker::GetInstance()->Speak("Compteur de balles. Sélectionner le mode Interactive Mochionne Mode.","fr");
-        Speaker::GetInstance()->Speak("Compteur de balles.","fr");
+        Speaker::GetInstance()->Speak("Montrer drapeau.","fr");
+
+
     
     while(1)
     {
-        
         StatusCheck::Check(m_ressources.get_cm730());
         
         if(StatusCheck::m_is_started == 0)
@@ -52,8 +52,8 @@ void Robot::application_compteur_balle::run()
         case SOCCER:
         case MOTION:
         case VISION:
-            if ( Speaker::is_ready() )
-                mode_compteur_balle();
+          // if ( Speaker::is_ready() )
+               mode_compteur_balle();
             break;
         }
     }
@@ -137,11 +137,12 @@ void Robot::application_compteur_balle::traitement_camera()
         unsigned char r, g, b;
         for(int i = 0; i < m_ressources.get_rgb_output()->m_NumberOfPixels; i++)
         {
+
             r = 0; g = 0; b = 0;
             
             int ligne = i / WIDTH;
             int colonne = i % WIDTH;
-            m_tab_pixel_drapeau[ ligne ][ colonne ] = false; // par défaut, le pixel n'est pas violet
+            m_tab_pixel_drapeau[ ligne ][ colonne ] = 0; // par défaut, le pixel n'est pas violet
 
             // violet
             if(m_ressources.get_purple_finder()->m_result->m_ImageData[i] == 1)
@@ -149,7 +150,10 @@ void Robot::application_compteur_balle::traitement_camera()
                 r = 204;
                 g = 0;
                 b = 255;
-                m_tab_pixel_drapeau[ ligne ][ colonne ] = true;
+                if ( Speaker::is_ready() )
+        //Speaker::GetInstance()->Speak("ROUGE !.","fr");
+
+                m_tab_pixel_drapeau[ ligne ][ colonne ] = 1;
             }
 
             if(r > 0 || g > 0 || b > 0)
@@ -160,7 +164,9 @@ void Robot::application_compteur_balle::traitement_camera()
                 m_ressources.get_streamer()->send_image(m_ressources.get_rgb_output());
             }
         }
-        supprimerPixel(0,0);
+
+       supprimerPixel(0,0);
+
         for(int j=0;j< m_ressources.get_rgb_output()->m_NumberOfPixels;j++)
         {
             if (m_tab_pixel_drapeau == false)
@@ -212,12 +218,13 @@ void Robot::application_compteur_balle::traitement_camera()
                     m_ressources.get_rgb_output()->m_ImageData[j * m_ressources.get_rgb_output()->m_PixelSize + 0] = r;
                     m_ressources.get_rgb_output()->m_ImageData[j * m_ressources.get_rgb_output()->m_PixelSize + 1] = g;
                     m_ressources.get_rgb_output()->m_ImageData[j * m_ressources.get_rgb_output()->m_PixelSize + 2] = b;
-                    m_ressources.get_streamer()->send_image(m_ressources.get_rgb_output());
                 }
             }
 
         }
     }
+
+   m_ressources.get_streamer()->send_image(m_ressources.get_rgb_output());
 
 }
 
@@ -225,24 +232,34 @@ void Robot::application_compteur_balle::traitement_camera()
 
 void application_compteur_balle::supprimerPixel(int i,int j)
 {
-    if(m_tab_pixel_drapeau[i][j] == false)
+    //std::cout <<"début" << std::endl;
+    if(m_tab_pixel_drapeau[i][j] == 0)
     {
-        m_tab_pixel_drapeau[i][j] = NULL;
+        //std::cout <<"1" << std::endl;
+        m_tab_pixel_drapeau[i][j] = 2;
     }
-    if(m_tab_pixel_drapeau[i-1][j] == false && i>0)
+    if(i>0)
     {
+        //std::cout <<"2" << std::endl;
+        if (m_tab_pixel_drapeau[i-1][j] == 0)
         supprimerPixel(i-1,j);
     }
-    if(m_tab_pixel_drapeau[i+1][j] == false && i<HEIGHT)
+    if(i<HEIGHT-1)
     {
+        //std::cout <<"3" << std::endl;
+        if(m_tab_pixel_drapeau[i+1][j] == 0 )
         supprimerPixel(i+1,j);
     }
-    if(m_tab_pixel_drapeau[i][j+1] == false && j<WIDTH)
+    if( j<WIDTH-1)
     {
+        //std::cout <<"4" << std::endl;
+        if(m_tab_pixel_drapeau[i][j+1] == 0 )
         supprimerPixel(i,j+1);
     }
-    if(m_tab_pixel_drapeau[i][j-1] == false && j>0)
+    if(j>0)
     {
+        //std::cout <<"5" << std::endl;
+        if(m_tab_pixel_drapeau[i][j-1] == 0 )
         supprimerPixel(i,j-1);
     }
 }
