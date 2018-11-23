@@ -23,6 +23,13 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private TcpClient client;
+        private TcpListener listener;
+        private String IP = "10.16.3.214";
+        private int port = 53000;
+        private Socket socket;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -38,6 +45,21 @@ namespace WpfApp1
             }
             if (champReponse.Text == "réponse")
             {
+                client = new TcpClient(IP, port);
+                NetworkStream nwStream = client.GetStream();
+                byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes("GAGNE:04");
+
+                Console.WriteLine("Sending : GAGNE:04");
+                nwStream.Write(bytesToSend, 0, bytesToSend.Length);
+                // try
+                //{
+                //   client.Connect(IP,port);
+                //}
+                // catch (Exception ex)
+                //{
+                //     MessageBox.Show("Error : " + ex.Message);
+                // }
+
                 MessageBox.Show("Bravo! Vous avez résolu l'enigme.");
             }
             else if (champReponse.Text != "réponse")
