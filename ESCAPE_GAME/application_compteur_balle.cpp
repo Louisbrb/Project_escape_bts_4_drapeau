@@ -12,7 +12,7 @@
 #include "Action.h"
 #include "define.h"
 #include "Speaker.h"
-#include "string"
+
 /*************************************************************************************/
 /**
   * \brief Constructeur.
@@ -20,15 +20,13 @@
 Robot::application_compteur_balle::application_compteur_balle()
 {
 }
-   int compteur = 0;
+
 /*************************************************************************************/
 /**
   * \brief Lancement de la démo.
   */
 void Robot::application_compteur_balle::run()
 {
-
-    QString m_couleur_actuelle = "debut";
     init();
     // attente
     while(Action::GetInstance()->IsRunning()) usleep(8*1000);
@@ -129,30 +127,19 @@ void Robot::application_compteur_balle::traitement_camera()
     LinuxCamera::GetInstance()->CaptureFrame();
     memcpy(m_ressources.get_rgb_output()->m_ImageData, LinuxCamera::GetInstance()->fbuffer->m_RGBFrame->m_ImageData,
            LinuxCamera::GetInstance()->fbuffer->m_RGBFrame->m_ImageSize);
-    Point2D red_pos, yellow_pos, blue_pos, green_pos,purple_pos,black_pos,white_pos;
+    Point2D red_pos, yellow_pos, blue_pos, green_pos,purple_pos;
 
     if( StatusCheck::m_cur_mode == READY || StatusCheck::m_cur_mode == VISION || StatusCheck::m_cur_mode == SOCCER || StatusCheck::m_cur_mode == MOTION )
     {
         purple_pos = m_ressources.get_purple_finder()->GetPosition(LinuxCamera::GetInstance()->fbuffer->m_HSVFrame);
-        red_pos = m_ressources.get_red_finder()->GetPosition(LinuxCamera::GetInstance()->fbuffer->m_HSVFrame);
-        yellow_pos = m_ressources.get_yellow_finder()->GetPosition(LinuxCamera::GetInstance()->fbuffer->m_HSVFrame);
-        blue_pos = m_ressources.get_blue_finder()->GetPosition(LinuxCamera::GetInstance()->fbuffer->m_HSVFrame);
-        green_pos = m_ressources.get_green_finder()->GetPosition(LinuxCamera::GetInstance()->fbuffer->m_HSVFrame);
-        white_pos = m_ressources.get_white_finder()->GetPosition(LinuxCamera::GetInstance()->fbuffer->m_HSVFrame);
-        black_pos = m_ressources.get_black_finder()->GetPosition(LinuxCamera::GetInstance()->fbuffer->m_HSVFrame);
+
         // modification de la sortie vidéo pour un meilleur contrôle de la détection
         unsigned char r, g, b;
-        int nb_pixel_bleu = 0;
-        int nb_pixel_jaune = 0;
-        int nb_pixel_violet = 0;
-
-
         for(int i = 0; i < m_ressources.get_rgb_output()->m_NumberOfPixels; i++)
         {
 
-
             r = 0; g = 0; b = 0;
-
+            
             int ligne = i / WIDTH;
             int colonne = i % WIDTH;
             m_tab_pixel_drapeau[ ligne ][ colonne ] = 0; // par défaut, le pixel n'est pas violet
@@ -163,50 +150,7 @@ void Robot::application_compteur_balle::traitement_camera()
                 r = 204;
                 g = 0;
                 b = 255;
-                m_tab_pixel_drapeau[ ligne ][ colonne ] = 1;
-                nb_pixel_violet = nb_pixel_violet+1;
-            }
-
-            // rouge
-            if(m_ressources.get_red_finder()->m_result->m_ImageData[i] == 1)
-            {
-                r = 255;
-                g = 0;
-                b = 0;
-            }
-
-            // jaune
-            if(m_ressources.get_yellow_finder()->m_result->m_ImageData[i] == 1)
-            {
-                r = 255;
-                g = 255;
-                b = 0;
-                nb_pixel_jaune = nb_pixel_jaune+1;
-            }
-
-            // blue
-            if(m_ressources.get_blue_finder()->m_result->m_ImageData[i] == 1)
-            {
-                r = 0;
-                g = 0;
-                b = 255;
-                nb_pixel_bleu = nb_pixel_bleu+1;
-            }
-            if(nb_pixel_bleu > 0 && nb_pixel_jaune > 0 && nb_pixel_violet > 0)
-            {
-                if(compteur == 0)
-                {
-                    std::cout << "laos" << std::endl;
-                    if ( Speaker::is_ready() )
-                        Speaker::GetInstance()->Speak("laos","fr");
-                }
-
-
-            }
-            compteur ++;
-            if(compteur == 1000)
-            {
-                compteur = 0;
+                    m_tab_pixel_drapeau[ ligne ][ colonne ] = 1;
             }
 
             if(r > 0 || g > 0 || b > 0)
@@ -219,13 +163,16 @@ void Robot::application_compteur_balle::traitement_camera()
         }
 
         supprimerPixel(0,0);
-        r = 0; g = 0; b = 0;
 
-        for(int j = 0; j < m_ressources.get_rgb_output()->m_NumberOfPixels; j++)
+        for(int j=0;j< m_ressources.get_rgb_output()->m_NumberOfPixels;j++)
         {
+
+            r = 0; g = 0; b = 0;
+
             int ligne = j / WIDTH;
             int colonne = j % WIDTH;
-            if (m_tab_pixel_drapeau[ligne][colonne] == 0)
+
+            if (m_tab_pixel_drapeau[ ligne ][ colonne ] == 0)
             {
                 if(m_ressources.get_white_finder()->m_result->m_ImageData[j] == 1)
                 {
@@ -234,11 +181,11 @@ void Robot::application_compteur_balle::traitement_camera()
                     b = 255;
                     if(m_couleur_actuelle != "white" && m_couleur_actuelle != "debut")
                     {
-                        //parcourir_couleur(1, j);
+                        parcourir_couleur("white", j);
                         m_couleur_actuelle = "white";
 
                     }
-                    else if (m_couleur_actuelle == "debut")
+                    else if (m_couleur_actuelle = "debut")
                     {
                         m_couleur_actuelle = "white";
                     }
@@ -250,98 +197,95 @@ void Robot::application_compteur_balle::traitement_camera()
                     b = 206;
                     if(m_couleur_actuelle != "blue" && m_couleur_actuelle != "debut")
                     {
-                        //parcourir_couleur(2, j);
+                        parcourir_couleur("blue", j);
                         m_couleur_actuelle = "blue";
 
                     }
-                    else if (m_couleur_actuelle == "debut")
+                    else if (m_couleur_actuelle = "debut")
                     {
                         m_couleur_actuelle = "blue";
-                    }
-                }
-
-                if(m_ressources.get_yellow_finder()->m_result->m_ImageData[j] == 1)
-                {
-                    r = 255;
-                    g = 255;
-                    b = 0;
-                    if(m_couleur_actuelle != "yellow" && m_couleur_actuelle != "debut")
-                    {
-                        //parcourir_couleur(3, j);
-                        m_couleur_actuelle = "yellow";
-
-                    }
-                    else if (m_couleur_actuelle == "debut")
-                    {
-                        m_couleur_actuelle = "yellow";
-                        m_description_drapeau = "yellow";
-                    }
-                }
-                if(m_ressources.get_black_finder()->m_result->m_ImageData[j] == 1)
-                {
-                    r = 0;
-                    g = 0;
-                    b = 0;
-                    if(m_couleur_actuelle != "black" && m_couleur_actuelle != "debut")
-                    {
-                        //parcourir_couleur(4, j);
-                        m_couleur_actuelle = "black";
-
-                    }
-                    else if (m_couleur_actuelle == "debut")
-                    {
-                        m_couleur_actuelle = "black";
-                    }
-
-                }
-
-                if(m_ressources.get_red_finder()->m_result->m_ImageData[j] == 1)
-                {
-                    r = 244;
-                    g = 42;
-                    b = 164;
-                    if(m_couleur_actuelle != "red" && m_couleur_actuelle != "debut")
-                    {
-                        //parcourir_couleur(5, j);
-                        m_couleur_actuelle = "red";
-
-                    }
-                    else if (m_couleur_actuelle == "debut")
-                    {
-                        m_couleur_actuelle = "red";
-                    }
-                }
-
-                if(m_ressources.get_green_finder()->m_result->m_ImageData[j] == 1)
-                {
-                    r = 0;
-                    g = 106;
-                    b = 78;
-                    if(m_couleur_actuelle != "green" && m_couleur_actuelle != "debut")
-                    {
-                        //parcourir_couleur(6, j);
-                        m_couleur_actuelle = "green";
-
-                    }
-                    else if (m_couleur_actuelle == "debut")
-                    {
-                        m_couleur_actuelle = "green";
                     }
                 }
             }
+            if(m_ressources.get_yellow_finder()->m_result->m_ImageData[j] == 1)
+            {
+                r = 255;
+                g = 255;
+                b = 0;
+                if(m_couleur_actuelle != "yellow" && m_couleur_actuelle != "debut")
+                {
+                    parcourir_couleur("yellow", j);
+                    m_couleur_actuelle = "yellow";
 
+                }
+                else if (m_couleur_actuelle = "debut")
+                {
+                    m_couleur_actuelle = "yellow";
+                    m_description_drapeau = "yellow";
+                }
+            }
+            if(m_ressources.get_black_finder()->m_result->m_ImageData[j] == 1)
+            {
+                r = 0;
+                g = 0;
+                b = 0;
+                if(m_couleur_actuelle != "black" && m_couleur_actuelle != "debut")
+                {
+                    parcourir_couleur("black", j);
+                    m_couleur_actuelle = "black";
+
+                }
+                else if (m_couleur_actuelle = "debut")
+                {
+                    m_couleur_actuelle = "black";
+                }
+
+            }
+            if(m_ressources.get_red_finder()->m_result->m_ImageData[j] == 1)
+            {
+                r = 244;
+                g = 42;
+                b = 164;
+                if(m_couleur_actuelle != "red" && m_couleur_actuelle != "debut")
+                {
+                    parcourir_couleur("red", j);
+                    m_couleur_actuelle = "red";
+
+                }
+                else if (m_couleur_actuelle = "debut")
+                {
+                    m_couleur_actuelle = "red";
+                }
+            }
+            if(m_ressources.get_green_finder()->m_result->m_ImageData[j] == 1)
+            {
+                r = 0;
+                g = 106;
+                b = 78;
+                if(m_couleur_actuelle != "green" && m_couleur_actuelle != "debut")
+                {
+                    parcourir_couleur("green", j);
+                    m_couleur_actuelle = "green";
+
+                }
+                else if (m_couleur_actuelle = "debut")
+                {
+                    m_couleur_actuelle = "green";
+                }
+            }
             if(r > 0 || g > 0 || b > 0)
             {
                 m_ressources.get_rgb_output()->m_ImageData[j * m_ressources.get_rgb_output()->m_PixelSize + 0] = r;
                 m_ressources.get_rgb_output()->m_ImageData[j * m_ressources.get_rgb_output()->m_PixelSize + 1] = g;
                 m_ressources.get_rgb_output()->m_ImageData[j * m_ressources.get_rgb_output()->m_PixelSize + 2] = b;
-
             }
         }
 
     }
 
+
     m_ressources.get_streamer()->send_image(m_ressources.get_rgb_output());
+
 }
 
 
@@ -379,11 +323,11 @@ void application_compteur_balle::supprimerPixel(int i,int j)
             supprimerPixel(i,j-1);
     }
 }
-QString application_compteur_balle::parcourir_couleur(int i,int j)
+QString application_compteur_balle::parcourir_couleur(QString couleur,int j)
 {
-    std::cout <<"8" << std::endl;
-    switch (i) {
-    case 1:
+
+    switch (couleur) {
+    case "white":
         if(m_ressources.get_purple_finder()->m_result->m_ImageData[j+1] == 1)
         {
             return m_description_drapeau + " and white";
@@ -394,18 +338,18 @@ QString application_compteur_balle::parcourir_couleur(int i,int j)
         }
         if(m_ressources.get_white_finder()->m_result->m_ImageData[j-1] == 1)
         {
-            parcourir_couleur(1,j-1);
+            parcourir_couleur("white",j-1);
         }
 
         if(m_ressources.get_white_finder()->m_result->m_ImageData[j+1] == 1)
         {
-            parcourir_couleur(1,j+1);
+            parcourir_couleur("white",j+1);
         }
 
 
 
         break;
-    case 2:
+    case "blue":
         if(m_ressources.get_purple_finder()->m_result->m_ImageData[j+1] == 1)
         {
             return m_description_drapeau + " and blue";
@@ -416,16 +360,16 @@ QString application_compteur_balle::parcourir_couleur(int i,int j)
         }
         if(m_ressources.get_white_finder()->m_result->m_ImageData[j-1] == 1)
         {
-            parcourir_couleur(2,j-1);
+            parcourir_couleur("blue",j-1);
         }
 
         if(m_ressources.get_white_finder()->m_result->m_ImageData[j+1] == 1)
         {
-            parcourir_couleur(2,j+1);
+            parcourir_couleur("blue",j+1);
         }
 
         break;
-    case 5:
+    case "red":
         if(m_ressources.get_purple_finder()->m_result->m_ImageData[j+1] == 1)
         {
             return m_description_drapeau + " and red";
@@ -436,16 +380,16 @@ QString application_compteur_balle::parcourir_couleur(int i,int j)
         }
         if(m_ressources.get_white_finder()->m_result->m_ImageData[j-1] == 1)
         {
-            parcourir_couleur(5,j-1);
+            parcourir_couleur("red",j-1);
         }
 
         if(m_ressources.get_white_finder()->m_result->m_ImageData[j+1] == 1)
         {
-            parcourir_couleur(5,j+1);
+            parcourir_couleur("red",j+1);
         }
 
         break;
-    case 4:
+    case "black":
         if(m_ressources.get_purple_finder()->m_result->m_ImageData[j+1] == 1)
         {
             return m_description_drapeau + " and black";
@@ -456,16 +400,16 @@ QString application_compteur_balle::parcourir_couleur(int i,int j)
         }
         if(m_ressources.get_white_finder()->m_result->m_ImageData[j-1] == 1)
         {
-            parcourir_couleur(4,j-1);
+            parcourir_couleur("black",j-1);
         }
 
         if(m_ressources.get_white_finder()->m_result->m_ImageData[j+1] == 1)
         {
-            parcourir_couleur(4,j+1);
+            parcourir_couleur("black",j+1);
         }
 
         break;
-    case 3:
+    case "yellow":
         if(m_ressources.get_purple_finder()->m_result->m_ImageData[j+1] == 1)
         {
             return m_description_drapeau + " and yellow";
@@ -476,16 +420,16 @@ QString application_compteur_balle::parcourir_couleur(int i,int j)
         }
         if(m_ressources.get_white_finder()->m_result->m_ImageData[j-1] == 1)
         {
-            parcourir_couleur(3,j-1);
+            parcourir_couleur("yellow",j-1);
         }
 
         if(m_ressources.get_white_finder()->m_result->m_ImageData[j+1] == 1)
         {
-            parcourir_couleur(3,j+1);
+            parcourir_couleur("yellow",j+1);
         }
 
         break;
-    case 6:
+    case "green":
         if(m_ressources.get_purple_finder()->m_result->m_ImageData[j+1] == 1)
         {
             return m_description_drapeau + " and green";
@@ -496,12 +440,12 @@ QString application_compteur_balle::parcourir_couleur(int i,int j)
         }
         if(m_ressources.get_white_finder()->m_result->m_ImageData[j-1] == 1)
         {
-            parcourir_couleur(6,j-1);
+            parcourir_couleur("green",j-1);
         }
 
         if(m_ressources.get_white_finder()->m_result->m_ImageData[j+1] == 1)
         {
-            parcourir_couleur(6,j+1);
+            parcourir_couleur("green",j+1);
         }
 
         break;
