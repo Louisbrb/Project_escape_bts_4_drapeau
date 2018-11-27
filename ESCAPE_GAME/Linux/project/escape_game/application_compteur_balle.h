@@ -28,7 +28,7 @@ namespace Robot
 
         private:
             void supprimerPixel(int i,int j);
-            QString parcourircouleur();
+            QString parcourircouleur(QString couleur,int j);
             void init();
             void mode_compteur_balle();
             void affiche_nombre_de_pixels_bleus();
@@ -37,9 +37,9 @@ namespace Robot
 
 
         private:
-            QString m_couleur_actuelle;
-            QString m_description_drapeau;
-            bool m_tab_pixel_drapeau[ HEIGHT ][ WIDTH ];
+            QString m_couleur_actuelle = "debut";
+            QString m_description_drapeau = "";
+            int m_tab_pixel_drapeau[ HEIGHT ][ WIDTH ];
             bool m_tab_pixel_vu[ HEIGHT ][ WIDTH ];
     }; // end class application_compteur_balle
 } // end namespace Robot
