@@ -49,7 +49,7 @@ namespace WpfApp1
                 NetworkStream nwStream = client.GetStream();
                 byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes("GAGNE:04");
 
-                Console.WriteLine("Sending : GAGNE:04");
+                //Console.WriteLine("Sending : GAGNE:04");
                 nwStream.Write(bytesToSend, 0, bytesToSend.Length);
                 // try
                 //{
