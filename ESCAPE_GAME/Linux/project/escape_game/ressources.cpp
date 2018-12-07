@@ -41,7 +41,7 @@ Robot::ressources::ressources()
     m_red_finder = new ColorFinder(353, 15, 83, 96, 0.3, 50.0);
     httpd::red_finder = m_red_finder;
 
-    m_yellow_finder = new ColorFinder(60, 45, 100, 100, 0.3, 50.0);
+    m_yellow_finder = new ColorFinder(60, 5, 50, 30, 0.3, 50.0);
     httpd::yellow_finder = m_yellow_finder;
 
     m_blue_finder = new ColorFinder(200, 45, 25, 20, 0.3, 50.0);
@@ -50,7 +50,8 @@ Robot::ressources::ressources()
     m_green_finder = new ColorFinder(207, 15, 100, 81, 0.3, 50.0);
     httpd::green_finder = m_green_finder;
 
-    m_purple_finder = new ColorFinder(288, 15, 100, 100, 0.3, 50.0);
+    m_purple_finder = new ColorFinder(320, 35, 0, 0, 0.3, 50.0);
+
     httpd::purple_finder = m_purple_finder;
 
     m_black_finder = new ColorFinder(0, 15, 0, 0, 0.3, 50.0);
