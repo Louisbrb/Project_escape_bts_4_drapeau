@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="Alfred" Height="350" Width="525" Icon="Images/roboticon_1.ico" ResizeMode="NoResize" Foreground="#FF1421A8" Background="White">
+        Title="Alfred" Height="350" Width="525" Icon="Images/roboticon_1.ico" ResizeMode="NoResize" Foreground="#FF1421A8" Background="White" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="Regles" TargetType="Label">
             <Setter Property="FontFamily" Value="Papyrus" />

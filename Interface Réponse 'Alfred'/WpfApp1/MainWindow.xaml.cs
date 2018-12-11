@@ -23,9 +23,11 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
-        private String reponse = "Laos"; //la bonne réponse
+        private String reponse = "Palaos"; //la bonne réponse
         private String IP = "10.16.3.214"; //l'adresse IP du serveur
         private int port = 53000; //le port d'écoute du serveur
+        private int cpt = 0;
+        private int cpt2 = 0;
 
         public MainWindow()
         {
@@ -72,13 +74,46 @@ namespace WpfApp1
         //bouton indice
         private void Indices_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Insérez indice ici!\nInsérez indice ici\nInsérer indice ici", "Indices");
+            cpt = cpt + 1;
+            switch (cpt)
+            {
+                case 1:
+                    MessageBox.Show(messageBoxText: "Il s'agie d'un pays situé en Micronésie dans l'ouest de l'Océanie.", caption: "Indices", button: MessageBoxButton.OK, icon: MessageBoxImage.Information);
+                break;
+                case 2:
+                    MessageBox.Show(messageBoxText: "Parmis ses langues officielles: l'anglais et le japonais.", caption: "Indices", button: MessageBoxButton.OK, icon: MessageBoxImage.Information);
+                    break;
+                case 3:
+                    MessageBox.Show(messageBoxText: "Sa capitale est Melekeok. La capitale la moins peuplée du monde.", caption: "Indices", button: MessageBoxButton.OK, icon: MessageBoxImage.Information);
+                    break;
+                case 4:
+                    MessageBox.Show(messageBoxText: "Dans ce pays, le système d'organisation social est un matriarcat, ainsi il n'est pas possible de transférer des terres sans l'accord des femmes.", caption: "Indices", button: MessageBoxButton.OK, icon: MessageBoxImage.Information);
+                    break;
+                case 5:
+                    MessageBox.Show(messageBoxText: "Tu désespères? clique sur le bouton clin d'oeil !", caption: "Indices", button: MessageBoxButton.OK, icon: MessageBoxImage.Information);
+                    cpt = 0;
+                    break;
+                default:
+                    break;
+            }
         }
 
         //bouton message du dev
         private void mehdi_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Il y a un correcteur d'ortographe.\nIl suffit d'appuyer sur \"ESPACE\" à la fin de votre réponse.\n\n-Mehdi （ゝ‿ ・）","Note du dev");
+            cpt2 = cpt2 +1;
+            switch (cpt2)
+            {
+                case 1:
+            MessageBox.Show("Il y a un correcteur d'ortographe.\nIl suffit d'appuyer sur \"ESPACE\" à la fin de votre réponse.\n\n-Mehdi （ゝ‿ ・）", "Note du dev");
+                    break;
+                case 2:
+                    MessageBox.Show("C'est Pas laos !\n\n-Mehdi （ゝ‿ ・）", "Note du dev");
+                    cpt2 = 0;
+                    break;
+                default:
+                    break;
+            }
         }
 
         //selection du texte lors d'un focus sur le champ de texte
