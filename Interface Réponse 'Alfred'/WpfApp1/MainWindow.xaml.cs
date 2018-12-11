@@ -34,16 +34,30 @@ namespace WpfApp1
             InitializeComponent();
         }
 
+        public void Reset()
+        {
+            InitializeComponent();
+            champReponse.Text = "Entrez réponse";
+            cpt = 0;
+            cpt2 = 0;
+        }
+
         //bouton valider
         private void valider_Click(object sender, RoutedEventArgs e)
         {
-            if (champReponse.Text[champReponse.Text.Length - 1] == ' ')
+            try
             {
-                champReponse.SelectionStart = 0;
-                champReponse.SelectionLength = champReponse.Text.Length - 1;
-                champReponse.Text = champReponse.SelectedText;
+                if (champReponse.Text[champReponse.Text.Length - 1] == ' ')
+                {
+                    champReponse.SelectionStart = 0;
+                    champReponse.SelectionLength = champReponse.Text.Length - 1;
+                    champReponse.Text = champReponse.SelectedText;
+                }
             }
-
+            catch
+            {
+                MessageBox.Show("Veuillez saisir une réponse.", "Erreur");
+            }
             //condition pour une bonne réponse
             if (champReponse.Text == reponse)
             {
@@ -60,7 +74,12 @@ namespace WpfApp1
                 //deconnexion du socket pour le réutiliser et message de victoire
                 socket.Disconnect(false);
                 socket.Close();
-                MessageBox.Show("Bravo! Vous avez résolu l'enigme.", "Victoire!");
+                var result = MessageBox.Show("Bravo! Vous avez résolu l'enigme.", "Victoire!");
+                if (result == MessageBoxResult.OK)
+                {
+                    Reset();
+                }
+
             }
 
             //mauvaise réponse
