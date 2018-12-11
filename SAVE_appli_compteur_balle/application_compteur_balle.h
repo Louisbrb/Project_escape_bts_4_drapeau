@@ -8,6 +8,8 @@
  */
 
 #include "application.h"
+
+#include <qstring.h>
 const int WIDTH  = 320;
 const int HEIGHT = 240;
 
@@ -33,6 +35,7 @@ namespace Robot
             void traitement_camera();
 
         private:
+            QString m_couleur_actuelle = NULL;
             bool m_tab_pixel_drapeau[ HEIGHT ][ WIDTH ];
             bool m_tab_pixel_vu[ HEIGHT ][ WIDTH ];
     }; // end class application_compteur_balle

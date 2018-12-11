@@ -157,6 +157,7 @@ void Robot::application_compteur_balle::traitement_camera()
                 m_ressources.get_rgb_output()->m_ImageData[i * m_ressources.get_rgb_output()->m_PixelSize + 0] = r;
                 m_ressources.get_rgb_output()->m_ImageData[i * m_ressources.get_rgb_output()->m_PixelSize + 1] = g;
                 m_ressources.get_rgb_output()->m_ImageData[i * m_ressources.get_rgb_output()->m_PixelSize + 2] = b;
+                m_ressources.get_streamer()->send_image(m_ressources.get_rgb_output());
             }
         }
         supprimerPixel(0,0);
@@ -164,13 +165,14 @@ void Robot::application_compteur_balle::traitement_camera()
         {
             int ligne =i / WIDTH;
             int colone =i % WIDTH;
-            if (m_tab_pixel_drapeau == false)
+            if (m_tab_pixel_drapeau[ligne][colone] == false)
             {
                 if(m_ressources.get_white_finder()->m_result->m_ImageData[i] == 1)
                 {
                     r = 255;
                     g = 255;
                     b = 255;
+
                 }
                 if(m_ressources.get_blue_finder()->m_result->m_ImageData[i] == 1)
                 {
@@ -209,8 +211,6 @@ void Robot::application_compteur_balle::traitement_camera()
 
 }
 
-m_ressources.get_streamer()->send_image(m_ressources.get_rgb_output());
-}
 void Robot::supprimerPixel(int i,int j)
 {
     if(m_tab_pixel_purple[i][j] == false)

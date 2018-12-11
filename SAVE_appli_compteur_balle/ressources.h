@@ -29,7 +29,8 @@ namespace Robot
     public:
         ressources();
         ~ressources();
-        ColorFinder* get_noir_finder() const;
+        ColorFinder* get_white_finder() const;
+        ColorFinder* get_black_finder() const;
         ColorFinder* get_blanche_finder() const;
         ColorFinder* get_purple_finder() const;
         ColorFinder* get_ball_finder() const;
